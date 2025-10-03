@@ -19,13 +19,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 23
       - name: Install dependencies
         run: npm ci
       - name: Build
         env:
           # Set this to your repository name for project sites
           BASE_PATH: /${{ github.event.repository.name }}/
+          # Configure this repository variable in Settings → Variables
+          # Example: https://your-worker.workers.dev/api/generate
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
         run: npm run build
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
