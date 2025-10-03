@@ -7,6 +7,20 @@ const isProd = import.meta.env.PROD;
 // Set `VITE_API_URL` to your Worker endpoint (e.g., https://your-worker.workers.dev/api/generate).
 const API_URL_OVERRIDE = import.meta.env.VITE_API_URL as string | undefined;
 
+function normalizeApiUrl(url?: string): string {
+  if (!url) return "/api/generate";
+  let u = url.trim();
+  // Ensure protocol
+  if (!/^https?:\/\//i.test(u)) {
+    u = `https://${u}`;
+  }
+  // Ensure path ends with /api/generate
+  if (!/\/api\/generate$/i.test(u)) {
+    u = u.replace(/\/+$/, "") + "/api/generate";
+  }
+  return u;
+}
+
 // Try multiple free models to reduce 400/403 errors due to availability/quotas
 const FALLBACK_MODELS = [
   "meta-llama/llama-4-maverick:free",
@@ -27,7 +41,7 @@ async function requestChat(
   // In production, delegate to backend proxy to keep API key secret.
   // If `VITE_API_URL` is defined, use it (e.g., Cloudflare Worker URL).
   if (isProd) {
-    const proxyUrl = API_URL_OVERRIDE || "/api/generate"; // default for Cloudflare Pages Functions
+    const proxyUrl = normalizeApiUrl(API_URL_OVERRIDE);
     const response = await axios.post(
       proxyUrl,
       { preferredModel, ...body },
