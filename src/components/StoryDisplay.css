@@ -1,0 +1,213 @@
+.story-page {
+    min-height: 100vh;
+    background: radial-gradient(1200px 800px at 30% 10%, rgba(40,60,120,.35), transparent 60%),
+                linear-gradient(135deg, #06080f 0%, #0d1730 50%, #0b1a3a 100%);
+    padding: 2rem;
+    animation: fadeIn 0.6s ease;
+}
+
+/* Corner controls (no floating bar) */
+.story-controls {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none; /* let buttons opt-in */
+}
+
+.story-btn {
+    pointer-events: auto;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.story-btn:hover { color: var(--text); }
+
+.story-controls .right { display: flex; gap: 12px; }
+
+/* Minimal read layout */
+.story-read {
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* container removed in minimal mode */
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.story-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.book-icon {
+    color: var(--primary);
+    animation: bookOpen 0.6s ease;
+}
+
+@keyframes bookOpen {
+    from {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+    to {
+        transform: rotateY(0);
+        opacity: 1;
+    }
+}
+
+.story-paragraph {
+    line-height: 1.9;
+    margin-bottom: 1.25rem;
+}
+
+.story-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text);
+}
+
+.action-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.action-btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: var(--primary-contrast);
+    border-color: transparent;
+    box-shadow: var(--glow);
+}
+
+.action-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.story-paragraph {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    animation: fadeInUp 0.6s ease backwards;
+    overflow: hidden; /* contain drop-cap float for consistent top alignment */
+}
+
+.story-paragraph:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.story-paragraph:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.story-paragraph:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.story-paragraph:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.story-paragraph:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* drop-cap removed per new minimal style */
+
+@media (max-width: 768px) {
+    .story-page {
+        padding: 1rem;
+    }
+
+    .story-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .story-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .story-header h1 {
+        font-size: 2rem;
+    }
+
+    .story-actions {
+        width: 100%;
+    }
+
+    .action-btn {
+        justify-content: center;
+    }
+
+    .story-paragraph:first-letter {
+        font-size: 3rem;
+        line-height: 1; /* normalize baseline */
+        margin: -0.2em 0.1em 0 0; /* raise slightly less on small screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .story-paragraph:first-letter {
+        font-size: 2.5rem;
+        line-height: 1; /* normalize baseline */
+        margin: -0.15em 0.1em 0 0; /* raise slightly less on small screens */
+    }
+}
