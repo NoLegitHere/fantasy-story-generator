@@ -58,7 +58,7 @@ function App() {
   };
 
   // Preferred model when 18+ is enabled
-  const dolphin = "x-ai/grok-4-fast:free";
+  const dolphin = "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
 
   const handleFeelingMagical = async () => {
     const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
