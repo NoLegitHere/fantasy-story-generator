@@ -2,12 +2,7 @@ export interface Env { OPENROUTER_API_KEY: string }
 
 const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
 const FALLBACK_MODELS = [
-  "meta-llama/llama-4-maverick:free",
-  "google/gemma-3n-e4b-it:free",
-  "deepseek/deepseek-chat-v3.1:free",
   "x-ai/grok-4-fast:free",
-  "openai/gpt-oss-20b:free",
-  "mistralai/mistral-nemo:free",
 ];
 
 function corsHeaders(origin?: string) {
