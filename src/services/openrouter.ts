@@ -3,6 +3,9 @@ import type { StoryFormData } from "../types";
 
 const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
 const isProd = import.meta.env.PROD;
+// When hosting static on GitHub Pages, point to a Cloudflare Worker URL.
+// Set `VITE_API_URL` to your Worker endpoint (e.g., https://your-worker.workers.dev/api/generate).
+const API_URL_OVERRIDE = import.meta.env.VITE_API_URL as string | undefined;
 
 // Try multiple free models to reduce 400/403 errors due to availability/quotas
 const FALLBACK_MODELS = [
@@ -21,10 +24,12 @@ async function requestChat(
   body: Record<string, any>,
   preferredModel?: string,
 ): Promise<{ content: string; model: string }> {
-  // In production, delegate to backend proxy to keep API key secret
+  // In production, delegate to backend proxy to keep API key secret.
+  // If `VITE_API_URL` is defined, use it (e.g., Cloudflare Worker URL).
   if (isProd) {
+    const proxyUrl = API_URL_OVERRIDE || "/api/generate"; // default for Cloudflare Pages Functions
     const response = await axios.post(
-      "/api/generate",
+      proxyUrl,
       { preferredModel, ...body },
       { headers: { "Content-Type": "application/json" } }
     );
