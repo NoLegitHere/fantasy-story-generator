@@ -25,10 +25,8 @@ function normalizeApiUrl(url?: string): string {
 const FALLBACK_MODELS = [
   "meta-llama/llama-4-maverick:free",
   "google/gemma-3n-e4b-it:free",
-  "qwen/qwen3-235b-a22b:free",
   "deepseek/deepseek-chat-v3.1:free",
   "x-ai/grok-4-fast:free",
-  "moonshotai/kimi-k2:free",
   "openai/gpt-oss-20b:free",
   "mistralai/mistral-nemo:free"
 ];
