@@ -1,4 +1,4 @@
-name = "fantasy-story-generator-api"
+name = "fantasy-story-generator"
 main = "worker/index.ts"
 compatibility_date = "2024-10-01"
 
