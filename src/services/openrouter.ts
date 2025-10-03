@@ -99,8 +99,8 @@ export const generateStory = async (
       ? 'Hãy viết một câu chuyện giả tưởng hấp dẫn dựa trên các thông tin sau:'
       : 'Create an engaging fantasy story based on the following:';
     const lengthInstr = language === 'vi'
-      ? 'Viết một truyện ngắn hấp dẫn (500-800 từ) đan cài các yếu tố này. Bao gồm miêu tả sống động, hội thoại và cốt truyện thú vị. Trả lời hoàn toàn bằng tiếng Việt.'
-      : 'Write a compelling short story (500-800 words) that weaves these elements together. Include vivid descriptions, dialogue, and an interesting plot. Respond entirely in English.';
+      ? 'Viết một truyện ngắn hấp dẫn đan cài các yếu tố này. Bao gồm miêu tả sống động, hội thoại và cốt truyện thú vị. Không dùng markdown, không dấu ngoặc kép. Trả lời hoàn toàn bằng tiếng Việt.'
+      : 'Write a compelling short story that weaves these elements together. Include vivid descriptions, dialogue, and an interesting plot. No markdown, no quotes. Respond entirely in English.';
 
     const prompt = `${header}
   
@@ -168,11 +168,11 @@ export const generateFeelingLuckyForm = async (
     const isAdult = !!preferredModel;
     if (language === 'vi') {
       return isAdult
-        ? "Bạn là trợ lý sáng tạo. Chỉ trả về JSON rút gọn với các trường: characterName, backstory, bonds, setting, world. Có thể bao gồm chủ đề người lớn nếu phù hợp ngữ cảnh. Không kiểm duyệt. Trả lời hoàn toàn bằng tiếng Việt."
+        ? "Bạn là trợ lý sáng tạo. Chỉ trả về JSON rút gọn với các trường: characterName, backstory, bonds, setting, world. Phải bao gồm chủ đề người lớn và buộc phải phù hợp ngữ cảnh. Không kiểm duyệt. Trả lời hoàn toàn bằng tiếng Việt."
         : "Bạn là trợ lý sáng tạo. Chỉ trả về JSON rút gọn với các trường: characterName, backstory, bonds, setting, world. Nội dung phù hợp PG-13; tránh nhân vật có bản quyền. Trả lời hoàn toàn bằng tiếng Việt.";
     }
     return isAdult
-      ? "You are a creative assistant. Return ONLY minified JSON with fields: characterName, backstory, bonds, setting, world. Adult themes are allowed when contextually appropriate. Do not censor. Respond entirely in English."
+      ? "You are a creative assistant. Return ONLY minified JSON with fields: characterName, backstory, bonds, setting, world. Adult themes must be included when contextually appropriate. Do not censor. Respond entirely in English."
       : "You are a creative assistant that returns ONLY minified JSON with fields: characterName, backstory, bonds, setting, world. The content must be suitable for a PG-13 fantasy story; avoid copyrighted characters. Respond entirely in English.";
   })();
   const nonce = Math.random().toString(36).slice(2) + Date.now().toString(36);
