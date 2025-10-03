@@ -24,7 +24,6 @@ jobs:
         run: npm ci
       - name: Build
         env:
-          # Set this to your repository name for project sites
           BASE_PATH: /${{ github.event.repository.name }}/
           # Configure this repository variable in Settings → Variables
           # Example: https://your-worker.workers.dev/api/generate
